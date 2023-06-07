@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MSC.Domain.Catalogue;
+using MSC.Domain.Common.Models;
+using MSC.Domain.Product.ValueObjects;
 
-namespace MSC.Domain.Product
-{
-    internal class Product
+
+namespace MSC.Domain.Product {
+
+    public class Product : AggregateRoot<ProductId>
     {
-        public uint Id { get; set; }
-
         public string Category { get; set; } = null!;
 
         public string Catalogue { get; set; } = null!;
@@ -34,10 +31,38 @@ namespace MSC.Domain.Product
 
         public string ImgPath { get; set; } = null!;
 
-      //  public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
+        //  public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
 
-       // public virtual CatalogueType CatalogueNavigation { get; set; } = null!;
+        public virtual CatalogueType CatalogueNavigation { get; set; } = null!;
 
-       // public virtual CategoryType CategoryNavigation { get; set; } = null!;
+        // public virtual CategoryType CategoryNavigation { get; set; } = null!;
+
+
+        private Product(ProductId id, string category, string catalogue, string name, string model, string brand,
+            string description, uint stock, uint price, uint cost, uint discount, bool featured, string imgPath) : base(id)
+        {
+
+            Category = category;
+            Catalogue = catalogue;
+            Name = name;
+            Model = model;
+            Brand = brand;
+            Description = description;
+            Stock = stock;
+            Price = price;
+            Cost = cost;
+            Discount = discount;
+            Featured = featured;
+            ImgPath = imgPath;
+
+        }
+
+        public static Product Create(ProductId id, string category, string catalogue, string name, string model, string brand,
+            string description, uint stock, uint price, uint cost, uint discount, bool featured, string imgPath)
+        {
+            return new(ProductId.CreateUnique(), category, catalogue, name, model, brand, description, stock, price, cost, discount, featured, imgPath);
+        }
+
     }
+
 }

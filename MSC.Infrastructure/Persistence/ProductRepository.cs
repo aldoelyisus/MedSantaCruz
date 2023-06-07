@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using
+using Microsoft.EntityFrameworkCore;
+using MSC.Application.Common.Interfaces.Persistence;
+using MSC.Domain.Product;
 
 namespace MSC.Infrastructure.Persistence
 {
@@ -105,5 +107,17 @@ namespace MSC.Infrastructure.Persistence
 
             await _context.SaveChangesAsync();
         }
+
+        Task<IEnumerable<Product>> IProductRepository.GetProducts()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Product> IProductRepository.GetProductById(uint id)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }

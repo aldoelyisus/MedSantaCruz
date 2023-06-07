@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using MSC.Application;
-using MSC.Application.csproj;
+using MSC.Domain.Product;
 
-namespace MSC.Application
+
+namespace MSC.Application.Common.Interfaces.Persistence
 {
-    internal interface IProductRepository
+    public interface IProductRepository
     {
         Task<IEnumerable<Product>> GetProducts();
         Task<Product> GetProductById(uint id);
